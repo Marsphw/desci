@@ -1,0 +1,17 @@
+# Dataset Documentation
+
+This is a comprehensive dataset containing user information.
+
+## Data Structure
+- User ID
+- Full Name  
+- Age
+- Email Address
+- Registration Date
+
+## Usage Guidelines
+Please ensure you follow data privacy regulations when using this dataset.
+
+## Contact
+For questions about this dataset, contact the data team.
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Debug Test</h1>
+    <button onclick="testAPIs()">Test APIs</button>
+    <div id="results"></div>
+    
+    <script>
+        async function testAPIs() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<p>Testing APIs...</p>';
+            
+            try {
+                // Test datasets
+                const datasetsResponse = await fetch('http://localhost:3000/api/datasets/explore/recommendations?limit=3');
+                const datasets = await datasetsResponse.json();
+                console.log('Datasets:', datasets);
+                
+                // Test projects  
+                const projectsResponse = await fetch('http://localhost:3000/api/projects/explore/recommendations?limit=3');
+                const projects = await projectsResponse.json();
+                console.log('Projects:', projects);
+                
+                results.innerHTML = `
+                    <h2>Results:</h2>
+                    <p>Datasets: ${datasets.length} items</p>
+                    <p>Projects: ${projects.length} items</p>
+                    <pre>${JSON.stringify({datasets: datasets.slice(0,1), projects: projects.slice(0,1)}, null, 2)}</pre>
+                `;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                results.innerHTML = `<p>Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

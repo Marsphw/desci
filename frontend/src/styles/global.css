@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0; /* The most important rule to remove the white border */
+  background-color: #0d1117; /* Set a base background color */
+}
+
+#app {
+  min-height: 100vh; /* Ensure the app takes at least the full viewport height */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* The debug border is no longer needed, we've won! */
+  /* border: 5px solid red; */
+}
+
+/* Custom Scrollbar Styles for WebKit Browsers */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d1117; /* Dark background for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #30363d; /* Grayish handle for the scrollbar */
+  border-radius: 6px;
+  border: 3px solid #0d1117; /* Creates a padding effect around the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #484f58; /* Lighter handle on hover for better UX */
+} 
