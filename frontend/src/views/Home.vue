@@ -6,8 +6,17 @@
         <n-h1>Welcome to DeSci-Proof</n-h1>
         <n-p>A decentralized platform for verifiable research.</n-p>
         <div class="hero-actions">
-          <n-button type="primary" size="large">Get Started</n-button>
-          <n-button ghost size="large" style="margin-left: 12px;">Explore Projects</n-button>
+            <n-button type="primary" size="large" @click="$router.push('/dashboard')">
+               Get Started
+             </n-button>
+          <n-button
+            ghost
+            size="large"
+            style="margin-left: 12px"
+            @click="$router.push('/explore')"
+          >
+            Explore Projects
+          </n-button>
         </div>
       </div>
 

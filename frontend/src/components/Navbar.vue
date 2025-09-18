@@ -4,10 +4,10 @@
       <router-link to="/" class="logo">DeSci-Proof</router-link>
     </div>
     <div class="navbar-center">
-       <n-dropdown trigger="hover" :options="projectOptions">
+       <n-dropdown trigger="hover" :options="projectOptions" @select = 'handleProjectDropdownSelect'>
         <n-a href="#">Projects</n-a>
       </n-dropdown>
-      <n-dropdown trigger="hover" :options="datasetOptions">
+      <n-dropdown trigger="hover" :options="datasetOptions" @select = 'handleDatasetDropdownSelect'>
         <n-a href="#">Datasets</n-a>
       </n-dropdown>
       <n-a href="#">Community</n-a>
@@ -76,16 +76,24 @@ const handleUserDropdownSelect = (key) => {
     }
 };
 
+const handleProjectDropdownSelect = (key) => {
+  router.push(key);
+};
+
+const handleDatasetDropdownSelect = (key) => {
+  router.push(key);
+};
+
 
 // --- Static Dropdown Options ---
 const projectOptions = [
-  { label: 'Explore All Projects', key: 'explore' },
-  { label: 'Start a New Project', key: 'new' }
+  { label: 'Explore All Projects', key: '/explore' },
+  { label: 'Start a New Project', key: '/projects' }
 ];
 
 const datasetOptions = [
-  { label: 'Browse Datasets', key: 'browse' },
-  { label: 'Submit a Dataset', key: 'submit' }
+  { label: 'Browse Datasets', key: '/explore' },
+  { label: 'Submit a Dataset', key: '/datasets/upload' }
 ];
 </script>
 
