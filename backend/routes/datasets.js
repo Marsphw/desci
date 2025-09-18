@@ -973,4 +973,24 @@ router.get('/:id/analytics', async (req, res) => {
   }
 });
 
+router.get('/:id/download', async (req, res) => {
+  const { id } = req.params;
+  console.log('[download] hit, id =', id);
+
+  // 1. 取文件记录
+  const file = await db.getAsync(
+    'SELECT * FROM dataset_files WHERE dataset_id = ? AND is_primary = 1',
+    [id]
+  );
+  if (!file) return res.status(404).send('No primary file');
+
+  // 2. 直接下载（不要加任何前缀）
+  res.download(file.file_path, file.original_name, (err) => {
+    if (err) {
+      console.error('[download] error', err);
+      return res.status(500).send('File not found on disk');
+    }
+  });
+});
+
 module.exports = router; 

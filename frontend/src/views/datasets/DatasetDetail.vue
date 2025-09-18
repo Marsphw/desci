@@ -456,48 +456,30 @@ const getPrivacyDescription = (privacyLevel) => {
   }
 }
 
-const downloadDataset = async () => {
-  isDownloading.value = true
+/* ===== 新增：下载数据集 ===== */
+// TODO: Download dataset from backend
+const downloadDataset = async (id) => {
   try {
-    // TODO: Implement actual download functionality
-    /* 1. Request file stream */
-    const res = await axios.get(
-      `http://localhost:3000/api/datasets/${datasetId.value}/download`,
-      { responseType: 'blob', timeout: 0 }   // large file: no timeout
-    )
+    const res = await fetch(`http://localhost:3000/api/datasets/${id}/download`)
+    if (!res.ok) throw new Error(res.statusText)
 
-    /* 2. Extract file name from response header (back-end Content-Disposition) */
-    const fileName =
-      res.headers['content-disposition']
-        ?.split('filename=')?.[1]?.replace(/"/g, '') ||
-      `dataset_${datasetId.value}.zip`
+    const filename =
+      res.headers.get('Content-Disposition')?.match(/filename="(.+)"/)?.[1] ??
+      `dataset_${id}.zip`
 
-    /* 3. Create a temporary URL and trigger download */
-    const blob = new Blob([res.data])
-    const url = window.URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = fileName
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    window.URL.revokeObjectURL(url)
+    const blob = await res.blob()
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = filename
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    URL.revokeObjectURL(url)
 
-    /* 4. Success toast + usage log */
-    message.success('Download started')
-    if (currentUser.value?.wallet_address) {
-      await axios.post(
-        `http://localhost:3000/api/datasets/${datasetId.value}/usage`,
-        {
-          action_type: 'download',
-          wallet_address: currentUser.value.wallet_address
-        }
-      )
-    }
-  } catch (error) {
-    message.error('Download failed')
-  } finally {
-    isDownloading.value = false
+    message.success('下载开始')
+  } catch (e) {
+    message.error('下载失败：' + e.message)
   }
 }
 
