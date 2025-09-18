@@ -140,7 +140,7 @@
 <script setup>
 import { h, ref, computed, onMounted, inject, watch } from 'vue';
 import { NLayout, NLayoutSider, NLayoutHeader, NLayoutContent, NMenu, NAvatar, NButton, NIcon } from 'naive-ui';
-import { HomeOutline, PersonOutline, FolderOpenOutline, DocumentTextOutline, SettingsOutline, LogOutOutline, MenuOutline, CompassOutline, ServerOutline, ShieldCheckmarkOutline, DiamondOutline, CheckmarkDoneOutline } from '@vicons/ionicons5';
+import { HomeOutline, PersonOutline, FolderOpenOutline, DocumentTextOutline, LogOutOutline, CompassOutline, ServerOutline, ShieldCheckmarkOutline, DiamondOutline, CheckmarkDoneOutline } from '@vicons/ionicons5';
 import { useRouter, useRoute } from 'vue-router';
 import { useWeb3 } from '../composables/useWeb3';
 import axios from 'axios';
@@ -187,11 +187,6 @@ const menuOptions = [
     label: 'Publications',
     key: 'publications',
     icon: renderIcon(DocumentTextOutline),
-  },
-  {
-    label: 'Settings',
-    key: 'settings',
-    icon: renderIcon(SettingsOutline),
   },
   {
     label: 'Explore',
