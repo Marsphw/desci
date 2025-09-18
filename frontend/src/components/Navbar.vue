@@ -4,10 +4,10 @@
       <router-link to="/" class="logo">DeSci-Proof</router-link>
     </div>
     <div class="navbar-center">
-       <n-dropdown trigger="hover" :options="projectOptions" @select = 'handleProjectDropdownSelect'>
+       <n-dropdown trigger="hover" :options="projectOptions" @select = 'handleDropdownSelect'>
         <n-a href="#">Projects</n-a>
       </n-dropdown>
-      <n-dropdown trigger="hover" :options="datasetOptions" @select = 'handleDatasetDropdownSelect'>
+      <n-dropdown trigger="hover" :options="datasetOptions" @select = 'handleDropdownSelect'>
         <n-a href="#">Datasets</n-a>
       </n-dropdown>
       <n-a href="#">Community</n-a>
@@ -76,11 +76,7 @@ const handleUserDropdownSelect = (key) => {
     }
 };
 
-const handleProjectDropdownSelect = (key) => {
-  router.push(key);
-};
-
-const handleDatasetDropdownSelect = (key) => {
+const handleDropdownSelect = (key) => {
   router.push(key);
 };
 
